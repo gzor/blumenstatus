@@ -29,6 +29,7 @@ float Hum = 0;
 void setup()
 {
   Serial.begin(115200);
+  dht.begin();
   pinMode(mhZ14aPIN, INPUT);
   ConnectToWiFi();
   ThingSpeak.begin(client);
@@ -93,7 +94,6 @@ void ReadCO2Sensor10times()
 
 void GetDHTSensorData()
 {
-
   sensors_event_t event;
   dht.temperature().getEvent(&event);
     if (isnan(event.temperature)) {
