@@ -16,6 +16,7 @@ void loop()
   GetDHTSensorData();
   //ReadCO2Sensor();
   ReadCO2Sensor10times();
+  readBodenfeuchte();
   SendData();
   //delay(60000);
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
@@ -176,4 +177,5 @@ void InterpretWriteToCloudReturnValue(int writeToCloudReturnValue)
 void readBodenfeuchte()
 {
   bodenFeuchte = analogRead(feuchtigkeistSensorPin);
+  Serial.println("bodenfeuchte: " + String(bodenFeuchte));
 }
