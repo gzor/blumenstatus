@@ -121,8 +121,12 @@ void SendData()
   }
   int writeToCloudReturnValue = 0;
   Serial.print("Sending Data to Thingspeak: ");
-  ThingSpeak.setField(1, Temp);
-  ThingSpeak.setField(2, Hum);
+  if(Temp != 0)
+  {
+    ThingSpeak.setField(1, Temp);
+    ThingSpeak.setField(2, Hum);
+  }
+
   ThingSpeak.setField(4, long(co2ppmMedian.getMedian()));
   writeToCloudReturnValue = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
   Serial.print(String(Temp)+", ");
