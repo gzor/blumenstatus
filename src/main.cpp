@@ -126,11 +126,13 @@ void SendData()
     ThingSpeak.setField(1, Temp);
     ThingSpeak.setField(2, Hum);
   }
-
   ThingSpeak.setField(4, long(co2ppmMedian.getMedian()));
   writeToCloudReturnValue = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
-  Serial.print(String(Temp)+", ");
-  Serial.print(String(Hum)+", ");
+  if(Temp != 0)
+  {
+    Serial.print(String(Temp)+", ");
+    Serial.print(String(Hum)+", ");
+  }
   Serial.print(String(co2ppmMedian.getMedian())+" ");
   Serial.println("Fields sended");  
   InterpretWriteToCloudReturnValue(writeToCloudReturnValue);
