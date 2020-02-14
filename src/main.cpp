@@ -50,10 +50,10 @@ void GetDHTSensorData()
       Serial.println(F("Error reading temperature!"));
     }
     else {
-      Serial.print(F("Temperature: "));
-      Serial.print(event.temperature);
+      // Serial.print(F("Temperature: "));
+      // Serial.print(event.temperature);
       Temp = event.temperature;
-      Serial.println(F("°C"));
+      // Serial.println(F("°C"));
     }
     // Get humidity event and print its value.
     dht.humidity().getEvent(&event);
@@ -61,10 +61,10 @@ void GetDHTSensorData()
       Serial.println(F("Error reading humidity!"));
     }
     else {
-      Serial.print(F("Humidity: "));
-      Serial.print(event.relative_humidity);
+      // Serial.print(F("Humidity: "));
+      // Serial.print(event.relative_humidity);
       Hum = event.relative_humidity;
-      Serial.println(F("%"));
+      // Serial.println(F("%"));
     }
   
   // Serial.println("Got DHT22  Data");
