@@ -5,6 +5,7 @@ void setup()
   Serial.begin(115200);
   dht.begin();
   pinMode(mhZ14aPIN, INPUT);
+  pinMode(feuchtigkeistSensorPin, INPUT);
   ConnectToWiFi();
   ThingSpeak.begin(client);
 }
@@ -100,12 +101,20 @@ void SendData()
     ThingSpeak.setField(1, Temp);
     ThingSpeak.setField(2, Hum);
   }
+  if(bodenFeuchte = 0)
+  {
+    ThingSpeak.setField(3, bodenFeuchte);
+  }
   ThingSpeak.setField(4, long(co2ppmMedian.getMedian()));
   writeToCloudReturnValue = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
   if(Temp != 0)
   {
     Serial.print(String(Temp)+", ");
     Serial.print(String(Hum)+", ");
+  }
+  if(bodenFeuchte = 0)
+  {
+    Serial.print(String(bodenFeuchte)+", ");
   }
   Serial.print(String(co2ppmMedian.getMedian())+" ");
   Serial.println("Fields sended");  
@@ -163,4 +172,8 @@ void InterpretWriteToCloudReturnValue(int writeToCloudReturnValue)
         Serial.println("Wifi not connected!");
       }
   }
+}
+void readBodenfeuchte()
+{
+  bodenFeuchte = analogRead(feuchtigkeistSensorPin);
 }
