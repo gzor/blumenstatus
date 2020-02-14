@@ -102,7 +102,7 @@ void SendData()
     ThingSpeak.setField(1, Temp);
     ThingSpeak.setField(2, Hum);
   }
-  if(bodenFeuchte = 0)
+  if(bodenFeuchte != 0)
   {
     ThingSpeak.setField(3, bodenFeuchte);
   }
@@ -113,7 +113,7 @@ void SendData()
     Serial.print(String(Temp)+", ");
     Serial.print(String(Hum)+", ");
   }
-  if(bodenFeuchte = 0)
+  if(bodenFeuchte != 0)
   {
     Serial.print(String(bodenFeuchte)+", ");
   }
