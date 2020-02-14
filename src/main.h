@@ -24,7 +24,7 @@ const unsigned long myChannelNumber = ***REMOVED***;
 const char * myWriteAPIKey = "***REMOVED***";
 const int mhZ14aPIN = 23;
 const int dhtPin = 17;
-const int feuchtigkeistSensorPin = 15;
+const int feuchtigkeistSensorPin = 2;
 
 // Change these variables ** stop
 
