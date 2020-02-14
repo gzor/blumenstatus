@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line script
+      run: pio run -t upload
+#    - name: Run a multi-line script
+#      run: |
+#        echo Add other actions to build,
+#        echo test, and deploy your project.
