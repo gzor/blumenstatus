@@ -1,30 +1,4 @@
-#include <Arduino.h>
-#include "../lib/runningfastmedian.h"
-#include <DHT.h>
-#include <ThingSpeak.h>
-#include <WiFi.h>
-#include <DHT_U.h>
 #include "main.h"
-
-// Change these variables ** start
-const char* ssid     = "***REMOVED***";
-const char* password = "***REMOVED***";
-//thingspeak credentials
-const unsigned long myChannelNumber = ***REMOVED***;
-const char * myWriteAPIKey = "***REMOVED***";
-const int mhZ14aPIN = 23;
-const int dhtPin = 17;
-
-// Change these variables ** stop
-
-WiFiClient client;
-FastRunningMedian<unsigned long,10, 0> co2ppmMedian;
-DHT_Unified dht(dhtPin, DHT22);
-float Temp = 0;
-float Hum = 0;
-
-#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  45        /* Time ESP32 will go to sleep (in seconds) */
 
 void setup()
 {
@@ -33,30 +7,6 @@ void setup()
   pinMode(mhZ14aPIN, INPUT);
   ConnectToWiFi();
   ThingSpeak.begin(client);
-
-   Serial.println(F("DHTxx Unified Sensor Example"));
-  // Print temperature sensor details.
-  sensor_t sensor;
-  dht.temperature().getSensor(&sensor);
-  Serial.println(F("------------------------------------"));
-  Serial.println(F("Temperature Sensor"));
-  Serial.print  (F("Sensor Type: ")); Serial.println(sensor.name);
-  Serial.print  (F("Driver Ver:  ")); Serial.println(sensor.version);
-  Serial.print  (F("Unique ID:   ")); Serial.println(sensor.sensor_id);
-  Serial.print  (F("Max Value:   ")); Serial.print(sensor.max_value); Serial.println(F("°C"));
-  Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("°C"));
-  Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("°C"));
-  Serial.println(F("------------------------------------"));
-  // Print humidity sensor details.
-  dht.humidity().getSensor(&sensor);
-  Serial.println(F("Humidity Sensor"));
-  Serial.print  (F("Sensor Type: ")); Serial.println(sensor.name);
-  Serial.print  (F("Driver Ver:  ")); Serial.println(sensor.version);
-  Serial.print  (F("Unique ID:   ")); Serial.println(sensor.sensor_id);
-  Serial.print  (F("Max Value:   ")); Serial.print(sensor.max_value); Serial.println(F("%"));
-  Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
-  Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
-  Serial.println(F("------------------------------------"));
 }
 
 
