@@ -6,6 +6,11 @@ void setup()
   dht.begin();
   pinMode(mhZ14aPIN, INPUT);
   pinMode(feuchtigkeistSensorPin, INPUT);
+  pinMode(relayPin1, OUTPUT);
+  pinMode(relayPin2, OUTPUT);
+  pinMode(relayPin3, OUTPUT);
+  pinMode(relayPin4, OUTPUT);
+  
   ConnectToWiFi();
   ThingSpeak.begin(client);
 }
@@ -22,6 +27,22 @@ void loop()
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
   esp_deep_sleep_start();
   delay(500);
+  if(currentRelayTest == 0 )
+  {
+    currentRelayTest = 1;
+    digitalWrite(relayPin1,HIGH);
+    digitalWrite(relayPin2,HIGH);
+    digitalWrite(relayPin3,HIGH);
+    digitalWrite(relayPin4,HIGH);
+  }else
+  {
+    currentRelayTest = 0;
+    digitalWrite(relayPin1,LOW);
+    digitalWrite(relayPin2,LOW);
+    digitalWrite(relayPin3,LOW);
+    digitalWrite(relayPin4,LOW);
+  }
+  
 }
 void ReadCO2Sensor10times()
 {
