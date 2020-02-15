@@ -63,11 +63,13 @@ void GetDHTSensorData()
 
 void readBodenfeuchte()
 {
+  const int untergrenze = 1700;
+  const int obergrenze = 3400;
   // returns value between 0 and 4095
   // 0 is super wet, 4095 is super dry
-  double temp = analogRead(feuchtigkeistSensorPin);
+  double temp = analogRead(feuchtigkeistSensorPin) - untergrenze;
   // conversion into %
   // 1- because 0% is defined as dry
-  bodenFeuchte = (1.0 - (temp / 4095.0)) * 100;
-  Serial.println("bodenfeuchte: " + String(bodenFeuchte)+ ", raw value: " + String(temp));
+  bodenFeuchte = (1.0 - (temp / (obergrenze - untergrenze))) * 100;
+  Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
 }
