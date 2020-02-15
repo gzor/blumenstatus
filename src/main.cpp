@@ -16,7 +16,7 @@ void loop()
   ReadCO2Sensor10times();
   readBodenfeuchte();
   Connect T;
-  T.SendData(Temp,Hum,bodenFeuchte,co2ppmMedian.getMedian());
+  T.SendData(Temp, Hum, bodenFeuchte, co2ppmMedian.getMedian());
   //delay(60000);
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
   esp_deep_sleep_start();
@@ -61,14 +61,13 @@ void GetDHTSensorData()
   }
 }
 
-
 void readBodenfeuchte()
 {
   // returns value between 0 and 4095
   // 0 is super wet, 4095 is super dry
   double temp = analogRead(feuchtigkeistSensorPin);
-  // conversion into % 
+  // conversion into %
   // 1- because 0% is defined as dry
-  bodenFeuchte = 1.0 - (temp / 4095.0);
+  bodenFeuchte = (1.0 - (temp / 4095.0)) * 100;
   Serial.println("bodenfeuchte: " + String(bodenFeuchte));
 }

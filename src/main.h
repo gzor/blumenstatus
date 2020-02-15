@@ -20,7 +20,7 @@ const int relayPin3 = 4;
 const int relayPin4 = 16;
 
 RTC_DATA_ATTR int currentRelayTest = 0;
-// Change these variables ** stop
+
 
 
 FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
