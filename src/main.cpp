@@ -10,6 +10,11 @@ void setup()
   pinMode(relayPin2, OUTPUT);
   pinMode(relayPin3, OUTPUT);
   pinMode(relayPin4, OUTPUT);
+  digitalWrite(relayPin1,LOW);
+  digitalWrite(relayPin2,LOW);
+  digitalWrite(relayPin3,LOW);
+  digitalWrite(relayPin4,LOW);
+
 
   ConnectToWiFi();
   ThingSpeak.begin(client);
