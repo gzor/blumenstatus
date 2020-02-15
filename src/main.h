@@ -1,10 +1,9 @@
-#include <Arduino.h>
+
 #include "../lib/runningfastmedian.h"
 #include <DHT.h>
-#include "connect.h"
 #include <DHT_U.h>
 
-void InterpretWriteToCloudReturnValue(int);
+
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
 

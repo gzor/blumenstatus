@@ -1,4 +1,5 @@
 #include "main.h"
+#include "connect.h"
 
 void setup()
 {
@@ -14,7 +15,8 @@ void loop()
   //ReadCO2Sensor();
   ReadCO2Sensor10times();
   readBodenfeuchte();
-  SendData(Temp,Hum,bodenFeuchte,co2ppmMedian.getMedian());
+  Connect T;
+  T.SendData(Temp,Hum,bodenFeuchte,co2ppmMedian.getMedian());
   //delay(60000);
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
   esp_deep_sleep_start();
