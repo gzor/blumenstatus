@@ -67,9 +67,9 @@ void readBodenfeuchte()
   const int obergrenze = 3400;
   // returns value between 0 and 4095
   // 0 is super wet, 4095 is super dry
-  double temp = analogRead(feuchtigkeistSensorPin) - untergrenze;
+  double temp = analogRead(feuchtigkeistSensorPin);
   // conversion into %
   // 1- because 0% is defined as dry
-  bodenFeuchte = (1.0 - (temp / (obergrenze - untergrenze))) * 100;
+  bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
   Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
 }
