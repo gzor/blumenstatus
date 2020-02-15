@@ -12,9 +12,9 @@ class Connect
   const unsigned long myChannelNumber = ***REMOVED***;
   const char *myWriteAPIKey = "***REMOVED***";
   WiFiClient client;
-  public: 
-    void setupConnection();
+private:
     void ConnectToWiFi();
-    void SendData(float,float,float,long);
     void InterpretWriteToCloudReturnValue(int);
+public: 
+    void SendData(float,float,float,long);
 };

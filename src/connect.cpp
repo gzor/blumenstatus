@@ -1,13 +1,9 @@
 #include "connect.h"
 
-  void Connect::setupConnection()
+  void Connect::SendData(float temp,float hum, float moist,long co2ppm)
   {
     ConnectToWiFi();
     ThingSpeak.begin(client);
-  }
-  void Connect::SendData(float temp,float hum, float moist,long co2ppm)
-  {
-    setupConnection();
     int writeToCloudReturnValue = 0;
     Serial.print("Sending Data to Thingspeak: ");
     if (temp != 0)
