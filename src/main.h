@@ -5,23 +5,20 @@
 #include <WiFi.h>
 #include <DHT_U.h>
 
-
-void InterpretWriteToCloudReturnValue(int );
+void InterpretWriteToCloudReturnValue(int);
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
 void ConnectToWiFi();
 void SendData();
-void InterpretWriteToCloudReturnValue(int );
+void InterpretWriteToCloudReturnValue(int);
 void readBodenfeuchte();
 
-
-
 // Change these variables ** start
-const char* ssid     = "***REMOVED***";
-const char* password = "***REMOVED***";
+const char *ssid = "***REMOVED***";
+const char *password = "***REMOVED***";
 //thingspeak credentials
 const unsigned long myChannelNumber = ***REMOVED***;
-const char * myWriteAPIKey = "***REMOVED***";
+const char *myWriteAPIKey = "***REMOVED***";
 const int mhZ14aPIN = 23;
 const int dhtPin = 17;
 const int feuchtigkeistSensorPin = 36;
@@ -35,11 +32,11 @@ RTC_DATA_ATTR int currentRelayTest = 0;
 // Change these variables ** stop
 
 WiFiClient client;
-FastRunningMedian<unsigned long,10, 0> co2ppmMedian;
+FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
 DHT_Unified dht(dhtPin, DHT22);
 float Temp = 0;
 float Hum = 0;
 float bodenFeuchte = 0;
 
-#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  45        /* Time ESP32 will go to sleep (in seconds) */
+#define uS_TO_S_FACTOR 1000000 /* Conversion factor for micro seconds to seconds */
+#define TIME_TO_SLEEP 45       /* Time ESP32 will go to sleep (in seconds) */
