@@ -64,6 +64,11 @@ void GetDHTSensorData()
 
 void readBodenfeuchte()
 {
-  bodenFeuchte = analogRead(feuchtigkeistSensorPin);
+  // returns value between 0 and 4095
+  // 0 is super wet, 4095 is super dry
+  double temp = analogRead(feuchtigkeistSensorPin);
+  // conversion into % 
+  // 1- because 0% is defined as dry
+  bodenFeuchte = 1.0 - (temp / 4095.0);
   Serial.println("bodenfeuchte: " + String(bodenFeuchte));
 }
