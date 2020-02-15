@@ -7,10 +7,6 @@ void setup()
   pinMode(mhZ14aPIN, INPUT);
   pinMode(feuchtigkeistSensorPin, INPUT);
 
-  digitalWrite(relayPin1,LOW);
-  digitalWrite(relayPin2,LOW);
-  digitalWrite(relayPin3,LOW);
-  digitalWrite(relayPin4,LOW);
 
 
   ConnectToWiFi();
