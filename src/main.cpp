@@ -42,41 +42,21 @@ void ReadCO2Sensor10times()
     //Serial.print(String(co2ppmTemp1)+", ");
     co2ppmMedian.addValue(co2ppmTemp1);
   }
-  //Serial.println("Co2ppm: " + String(co2ppmMedian.getMedian())+" ");
 }
 
 void GetDHTSensorData()
 {
   sensors_event_t event;
   dht.temperature().getEvent(&event);
-  if (isnan(event.temperature))
+  if (!isnan(event.temperature))
   {
-    Serial.println(F("Error reading temperature!"));
-  }
-  else
-  {
-    // Serial.print(F("Temperature: "));
-    // Serial.print(event.temperature);
     Temp = event.temperature;
-    // Serial.println(F("°C"));
   }
-  // Get humidity event and print its value.
   dht.humidity().getEvent(&event);
-  if (isnan(event.relative_humidity))
+  if (!isnan(event.relative_humidity))
   {
-    Serial.println(F("Error reading humidity!"));
-  }
-  else
-  {
-    // Serial.print(F("Humidity: "));
-    // Serial.print(event.relative_humidity);
     Hum = event.relative_humidity;
-    // Serial.println(F("%"));
   }
-
-  // Serial.println("Got DHT22  Data");
-  // Serial.print("Temperature: " + String(lastValues.temperature) + ", ");
-  // Serial.println("Humidity: " + String(lastValues.humidity));
 }
 
 

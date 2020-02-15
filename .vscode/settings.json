@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.jj": "java",
+        "cmath": "cpp"
+    }
+}
