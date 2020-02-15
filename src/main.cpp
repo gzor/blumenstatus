@@ -6,10 +6,7 @@ void setup()
   dht.begin();
   pinMode(mhZ14aPIN, INPUT);
   pinMode(feuchtigkeistSensorPin, INPUT);
-  pinMode(relayPin1, OUTPUT);
-  pinMode(relayPin2, OUTPUT);
-  pinMode(relayPin3, OUTPUT);
-  pinMode(relayPin4, OUTPUT);
+
   digitalWrite(relayPin1,LOW);
   digitalWrite(relayPin2,LOW);
   digitalWrite(relayPin3,LOW);
