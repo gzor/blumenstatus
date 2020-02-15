@@ -69,5 +69,5 @@ void readBodenfeuchte()
   // conversion into %
   // 1- because 0% is defined as dry
   bodenFeuchte = (1.0 - (temp / 4095.0)) * 100;
-  Serial.println("bodenfeuchte: " + String(bodenFeuchte));
+  Serial.println("bodenfeuchte: " + String(bodenFeuchte)+ ", raw value: " + String(temp));
 }
