@@ -76,10 +76,6 @@ void GetDHTSensorData()
     Hum = event.relative_humidity;
     // Serial.println(F("%"));
   }
-
-  // Serial.println("Got DHT22  Data");
-  // Serial.print("Temperature: " + String(lastValues.temperature) + ", ");
-  // Serial.println("Humidity: " + String(lastValues.humidity));
 }
 void ConnectToWiFi()
 {
