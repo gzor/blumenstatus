@@ -7,8 +7,6 @@ void setup()
   pinMode(mhZ14aPIN, INPUT);
   pinMode(feuchtigkeistSensorPin, INPUT);
 
-
-
   ConnectToWiFi();
   ThingSpeak.begin(client);
 }
