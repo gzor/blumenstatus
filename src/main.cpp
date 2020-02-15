@@ -26,22 +26,6 @@ void loop()
   esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
   esp_deep_sleep_start();
   delay(500);
-  if (currentRelayTest == 0)
-  {
-    currentRelayTest = 1;
-    digitalWrite(relayPin1, HIGH);
-    digitalWrite(relayPin2, HIGH);
-    digitalWrite(relayPin3, HIGH);
-    digitalWrite(relayPin4, HIGH);
-  }
-  else
-  {
-    currentRelayTest = 0;
-    digitalWrite(relayPin1, LOW);
-    digitalWrite(relayPin2, LOW);
-    digitalWrite(relayPin3, LOW);
-    digitalWrite(relayPin4, LOW);
-  }
 }
 void ReadCO2Sensor10times()
 {
