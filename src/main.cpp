@@ -63,8 +63,8 @@ void GetDHTSensorData()
 
 void readBodenfeuchte()
 {
-  const int untergrenze = 1700;
-  const int obergrenze = 3400;
+  const int untergrenze = 1650;
+  const int obergrenze = 3390;
   // returns value between 0 and 4095
   // 0 is super wet, 4095 is super dry
   double temp = analogRead(feuchtigkeistSensorPin);
