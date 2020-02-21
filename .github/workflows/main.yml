@@ -10,11 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
+    - name: Run PlattformIO
       run: |
-        set PLATFORMIO_BUILD_FLAGS
+        echo $PLATFORMIO_BUILD_FLAGS
         pio run -t upload
-        
       env: # Or as an environment variable
         PLATFORMIO_BUILD_FLAGS: ${{ secrets.PLATFORMIO_BUILD_FLAGS }}
       
