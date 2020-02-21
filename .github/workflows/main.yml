@@ -17,7 +17,10 @@ jobs:
       
     - name: Run PlattformIO
       run: |
-        sed -i 's/REPLACETHIS/${{ secrets.pio_build_flag }}/g' platformio.ini
+        sed -i 's/verySecretPassword/${{ secrets.WIFI_PASS }}/g' platformio.ini
+        sed -i 's/niceWIFIName/${{ secrets.wifiSSID }}/g' platformio.ini
+        sed -i 's/0000/${{ secrets.thingspeakChannelNumber }}/g' platformio.ini
+        sed -i 's/ABCDEF/${{ secrets.thingspeakAPIKey }}/g' platformio.ini
         pio run -t upload
       
     - name: cleanup old action artifacts
