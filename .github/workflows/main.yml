@@ -16,9 +16,9 @@ jobs:
         PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
       
     - name: Run PlattformIO
-      run: pio run -t upload
-      env: 
-        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
+      run: |
+        sed -i 's/REPLACETHIS/$PLATFORMIO_BUILD_FLAGS/g' platformio.ini
+        pio run -t upload
       
     - name: cleanup old action artifacts
       run: |
