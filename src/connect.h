@@ -9,7 +9,7 @@ class Connect
     private:
     // Change these variables ** start
     const char *ssid = "***REMOVED***";
-    const char *password = ((String) WIFI_PASS).c_str();
+    const char *password = WIFI_PASS;
     //thingspeak credentials
     const unsigned long myChannelNumber = ***REMOVED***;
     const char *myWriteAPIKey = "***REMOVED***";
