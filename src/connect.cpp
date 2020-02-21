@@ -93,7 +93,7 @@ void  Connect::ConnectToWiFi()
 {
   WiFi.begin(ssid, password);
   Serial.print("Connect to SSID: " + String(ssid));
-  Serial.print("With password: " + String(ssid));
+  Serial.print("With password: " + String(password));
   int i = 0;
   while (WiFi.status() != WL_CONNECTED)
   {
