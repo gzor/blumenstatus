@@ -16,8 +16,8 @@ jobs:
         sed -i 's/niceWIFIName/${{ secrets.wifiSSID }}/g' platformio.ini
         sed -i 's/0000/${{ secrets.thingspeakChannelNumber }}/g' platformio.ini
         sed -i 's/ABCDEF/${{ secrets.thingspeakAPIKey }}/g' platformio.ini
-      env: 
-        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
+#      env: 
+#        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
       
     - name: Run PlattformIO
       run: pio run -t upload
