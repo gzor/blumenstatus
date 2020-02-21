@@ -2,6 +2,8 @@
 #include <WiFi.h>
 #include <Arduino.h>
 
+#include <ArduinoOTA.h>
+
 
 class Connect
 {
