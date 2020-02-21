@@ -13,7 +13,9 @@ jobs:
       run: pio run -t upload
       
     - name: cleanup old action artifacts
-      run: workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
+      run: |
+        chmod u+x workflow-scripts/delete-old-artifacts.sh
+        workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
       
     - name: Upload Compiled Binary as Artifact
       uses: actions/upload-artifact@v1.0.0
