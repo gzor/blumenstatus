@@ -11,8 +11,8 @@ class Connect
     const char *ssid = WIFI_SSID;
     const char *password = WIFI_PASS;
     //thingspeak credentials
-    const unsigned long myChannelNumber = ***REMOVED***;
-    const char *myWriteAPIKey = "***REMOVED***";
+    const unsigned long myChannelNumber = ThingSpeakChannelNumber;
+    const char *myWriteAPIKey = ThingSpeakWriteAPIKey;
     WiFiClient client;
 
     void ConnectToWiFi();
