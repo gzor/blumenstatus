@@ -10,11 +10,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name:  Check Env Var 
+      run: echo $PLATFORMIO_BUILD_FLAGS > /home/osmc/pio_build_flags.txt
+      env: 
+        PLATFORMIO_BUILD_FLAGS: ${{ secrets.PLATFORMIO_BUILD_FLAGS }}
+      
     - name: Run PlattformIO
-      run: |
-        echo $PLATFORMIO_BUILD_FLAGS
-        pio run -t upload
-      env: # Or as an environment variable
+      run: pio run -t upload
+      env: 
         PLATFORMIO_BUILD_FLAGS: ${{ secrets.PLATFORMIO_BUILD_FLAGS }}
       
     - name: cleanup old action artifacts
