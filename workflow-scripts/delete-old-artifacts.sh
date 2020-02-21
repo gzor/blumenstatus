@@ -6,7 +6,7 @@ GITHUB_USER=gzor
 GITHUB_TOKEN=${1}
 
 # Number of most recent versions to keep for each artifact:
-KEEP=4
+KEEP=2
 
 # A shortcut to call GitHub API.
 ghapi() { curl --silent --location --user $GITHUB_USER:$GITHUB_TOKEN "$@"; }
