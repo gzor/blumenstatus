@@ -6,11 +6,25 @@ jobs:
   build:
 
     runs-on: self-hosted
+    # needs jq and platformio installed installed
 
     steps:
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: pio run -t upload
+      
+    - name: cleanup old action artifacts
+      run: |
+        chmod u+x workflow-scripts/delete-old-artifacts.sh
+        workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
+      
+    - name: Upload Compiled Binary as Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: firmware.bin 
+        path: .pio/build/esp32doit-devkit-v1/firmware.bin
+        
+      
 #    - name: Run a multi-line script
 #      run: |
 #        echo Add other actions to build,
