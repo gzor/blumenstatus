@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# taken from https://github.com/jens-maus/RaspberryMatic/blob/master/.github/workflows
 
 # Customize those three lines with your repository and credentials:
 REPO=https://api.github.com/repos/gzor/blumenstatus
