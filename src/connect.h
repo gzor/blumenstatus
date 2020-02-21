@@ -4,13 +4,12 @@
 
 #include <ArduinoOTA.h>
 
-
 class Connect
 {
     private:
     // Change these variables ** start
-    const char *ssid = "***REMOVED***";
-    const char *password = "***REMOVED***";
+    const char *ssid = "WIFI_SSID";
+    const char *password = "WIFI_PASS";
     //thingspeak credentials
     const unsigned long myChannelNumber = ***REMOVED***;
     const char *myWriteAPIKey = "***REMOVED***";
