@@ -10,8 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: pio run -t upload
+    - name:  Check Env Var 
+      run: echo $PLATFORMIO_BUILD_FLAGS > /home/osmc/pio_build_flags.txt
+      env: 
+        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
+      
+    - name: Run PlattformIO
+      run: |
+        sed -i 's/REPLACETHIS/$PLATFORMIO_BUILD_FLAGS/g' platformio.ini
+        pio run -t upload
       
     - name: cleanup old action artifacts
       run: |
