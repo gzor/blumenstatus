@@ -16,6 +16,7 @@ class Connect
 
     void ConnectToWiFi();
     void InterpretWriteToCloudReturnValue(int);
+    void waitForOtaUpdate();
     
 public: 
     void SendData(float,float,float,long);
