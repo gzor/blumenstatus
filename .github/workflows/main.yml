@@ -11,7 +11,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: pio run -t upload
-      id: "1"
       
     - name: cleanup old action artifacts
       run: workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
@@ -21,8 +20,6 @@ jobs:
       with:
         name: firmware.bin 
         path: .pio/build/esp32doit-devkit-v1/
-      id: "2"  
-        
         
       
 #    - name: Run a multi-line script
