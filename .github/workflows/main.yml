@@ -17,7 +17,7 @@ jobs:
       
     - name: Run PlattformIO
       run: |
-        sed -i 's/REPLACETHIS/$PLATFORMIO_BUILD_FLAGS/g' platformio.ini
+        sed -i "s/REPLACETHIS/$PLATFORMIO_BUILD_FLAGS/g" platformio.ini
         pio run -t upload
       
     - name: cleanup old action artifacts
