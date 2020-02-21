@@ -6,6 +6,7 @@ jobs:
   build:
 
     runs-on: self-hosted
+    # needs jq and platformio installed installed
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +22,7 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: firmware.bin 
-        path: .pio/build/esp32doit-devkit-v1/
+        path: .pio/build/esp32doit-devkit-v1/firmware.bin
         
       
 #    - name: Run a multi-line script
