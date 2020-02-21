@@ -10,18 +10,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name:  Check Env Var 
-      run: echo $PLATFORMIO_BUILD_FLAGS > /home/osmc/pio_build_flags.txt
-      env: 
-        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
-      
-    - name: Run PlattformIO
+    - name:  replace dummys with actual secrets 
       run: |
         sed -i 's/verySecretPassword/${{ secrets.WIFI_PASS }}/g' platformio.ini
         sed -i 's/niceWIFIName/${{ secrets.wifiSSID }}/g' platformio.ini
         sed -i 's/0000/${{ secrets.thingspeakChannelNumber }}/g' platformio.ini
         sed -i 's/ABCDEF/${{ secrets.thingspeakAPIKey }}/g' platformio.ini
-        pio run -t upload
+      env: 
+        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
+      
+    - name: Run PlattformIO
+      run: pio run -t upload
       
     - name: cleanup old action artifacts
       run: |
