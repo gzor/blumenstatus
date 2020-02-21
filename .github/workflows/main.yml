@@ -18,11 +18,11 @@ jobs:
         chmod u+x workflow-scripts/delete-old-artifacts.sh
         workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
       
-    - name: Upload Compiled Binary as Artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: firmware.bin 
-        path: .pio/build/esp32doit-devkit-v1/firmware.bin
+#    - name: Upload Compiled Binary as Artifact
+#      uses: actions/upload-artifact@v1.0.0
+#      with:
+#        name: firmware.bin 
+#        path: .pio/build/esp32doit-devkit-v1/firmware.bin
         
       
 #    - name: Run a multi-line script
