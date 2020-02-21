@@ -12,6 +12,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: pio run -t upload
+      env: # Or as an environment variable
+        PLATFORMIO_BUILD_FLAGS: ${{ secrets.PLATFORMIO_BUILD_FLAGS }}
       
     - name: cleanup old action artifacts
       run: |
