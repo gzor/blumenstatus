@@ -1,3 +1,4 @@
+#pragma once
 #include <ThingSpeak.h>
 #include <WiFi.h>
 #include <Arduino.h>

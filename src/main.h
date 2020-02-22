@@ -1,8 +1,11 @@
 
+#pragma once
 #include "../lib/runningfastmedian.h"
 #include <DHT.h>
 #include <DHT_U.h>
-
+#include <cmath>
+#include "../.pio/libdeps/esp32doit-devkit-v1/Adafruit Unified Sensor_ID31/Adafruit_Sensor.h"
+#include "connect.h"
 
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
