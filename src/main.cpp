@@ -20,7 +20,7 @@ void loop()
 	T.SendData(Temp, Hum, bodenFeuchte, co2ppmMedian.getMedian());
 	//delay(60000);
 	esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
-	esp_deep_sleep_start();
+	//esp_deep_sleep_start();
 	delay(500);
 }
 

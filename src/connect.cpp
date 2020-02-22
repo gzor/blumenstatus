@@ -1,10 +1,11 @@
 #include "connect.h"
 
+#include "main.h"
+
 void Connect::SendData(float temp,float hum, float moist,long co2ppm)
 {
   ConnectToWiFi();
   ThingSpeak.begin(client);
-  int writeToCloudReturnValue = 0;
   Serial.print("Sending Data to Thingspeak: ");
   if (temp != 0)
   {
@@ -16,7 +17,7 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
     ThingSpeak.setField(3, moist);
   }
   ThingSpeak.setField(4, long(co2ppm));
-  writeToCloudReturnValue = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+  const int write_to_cloud_return_value = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
   if (temp != 0)
   {
     Serial.print(String(temp) + ", ");
@@ -28,7 +29,7 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
   }
   Serial.print(String(co2ppm) + " ");
   Serial.println("Fields sended");
-  InterpretWriteToCloudReturnValue(writeToCloudReturnValue);
+  InterpretWriteToCloudReturnValue(write_to_cloud_return_value);
 
   delay(500);
   waitForOtaUpdate();
@@ -139,6 +140,11 @@ void Connect::waitForOtaUpdate(){
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  
-  ArduinoOTA.handle();
+
+	// wait for firmware update, instead of deepsleep
+  for (int i=0;i< TIME_TO_SLEEP; t++)
+  {
+      ArduinoOTA.handle();
+      delay(1000); // one second delay
+  }
 }
