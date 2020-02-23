@@ -1,7 +1,5 @@
 #include "connect.h"
 
-#include "main.h"
-
 void Connect::SendData(float temp,float hum, float moist,long co2ppm)
 {
   ConnectToWiFi();
@@ -142,7 +140,7 @@ void Connect::waitForOtaUpdate(){
   Serial.println(WiFi.localIP());
 
 	// wait for firmware update, instead of deepsleep
-  for (int i=0;i< TIME_TO_SLEEP; i++)
+  for (int i=0;i< 45; i++)
   {
       ArduinoOTA.handle();
       delay(1000); // one second delay
