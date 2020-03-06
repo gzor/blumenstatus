@@ -140,9 +140,9 @@ void Connect::waitForOtaUpdate(){
   Serial.println(WiFi.localIP());
 
 	// wait for firmware update, instead of deepsleep
-  for (int i=0;i< 45; i++)
+  for (int i=0; i < (SECONDS_TO_SLEEP * 10); i++)
   {
       ArduinoOTA.handle();
-      delay(1000); // one second delay
+      delay(100); // 1/10 second delay
   }
 }
