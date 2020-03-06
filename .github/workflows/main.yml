@@ -16,25 +16,11 @@ jobs:
         sed -i 's/niceWIFIName/${{ secrets.wifiSSID }}/g' platformio.ini
         sed -i 's/0000/${{ secrets.thingspeakChannelNumber }}/g' platformio.ini
         sed -i 's/ABCDEF/${{ secrets.thingspeakAPIKey }}/g' platformio.ini
-#      env: 
-#        PLATFORMIO_BUILD_FLAGS: ${{ secrets.pio_build_flag }}
+        sed -i 's/1111/${{ secrets.thingspeakChannelNumberHigrow }}/g' platformio.ini
+        sed -i 's/GHIJK/${{ secrets.thingspeakAPIKeyHigrow }}/g' platformio.ini
+
       
     - name: Run PlattformIO
       run: pio run -t upload
       
-    - name: cleanup old action artifacts
-      run: |
-        chmod u+x workflow-scripts/delete-old-artifacts.sh
-        workflow-scripts/delete-old-artifacts.sh ${{ secrets.REPO_ACCESS_TOKEN }}
-      
-#    - name: Upload Compiled Binary as Artifact
-#      uses: actions/upload-artifact@v1.0.0
-#      with:
-#        name: firmware.bin 
-#        path: .pio/build/esp32doit-devkit-v1/firmware.bin
-        
-      
-#    - name: Run a multi-line script
-#      run: |
-#        echo Add other actions to build,
-#        echo test, and deploy your project.
+
