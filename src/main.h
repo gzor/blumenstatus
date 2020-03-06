@@ -4,8 +4,9 @@
 #include <cmath>
 #include <DHT.h>
 #include <DHT_U.h>
-#include "../.pio/libdeps/esp32doit-devkit-v1/Adafruit Unified Sensor_ID31/Adafruit_Sensor.h"
-#include "../lib/runningfastmedian.h"
+#ifdef CO2SENSOR
+    #include "../lib/runningfastmedian.h"
+#endif
 
 void ReadCO2Sensor10times();
 void GetDHTSensorData();

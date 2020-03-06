@@ -1,6 +1,9 @@
 #pragma once
 
-const int mhZ14aPIN = CO2PIN;
+#ifdef CO2SENSOR
+    const int mhZ14aPIN = CO2PIN;
+#endif
+
 const int dhtPin = DHTPIN;
 const int feuchtigkeistSensorPin = MOISTPIN;
 

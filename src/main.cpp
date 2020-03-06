@@ -32,6 +32,7 @@ void loop()
 	delay(500);
 }
 
+#ifdef CO2SENSOR
 void ReadCO2Sensor10times()
 {
 	for (int i = 0; i < 10; i++)
@@ -53,6 +54,7 @@ void ReadCO2Sensor10times()
 		co2ppmMedian.addValue(co2ppmTemp1);
 	}
 }
+#endif
 
 void GetDHTSensorData()
 {
