@@ -135,10 +135,11 @@ void Connect::waitForOtaUpdate(){
 
   ArduinoOTA.begin();
 
-  Serial.println("Ready");
+  
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-
+  Serial.println("Waiting for OTA");
+  
 	// wait for firmware update, instead of deepsleep
   for (int i=0; i < (SECONDS_TO_SLEEP * 10); i++)
   {

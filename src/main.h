@@ -17,10 +17,11 @@ void readBodenfeuchte();
 
 RTC_DATA_ATTR int currentRelayTest = 0;
 
+#ifdef CO2SENSOR
+    FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
+#endif
 
-
-FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
-DHT_Unified dht(dhtPin, DHT22);
+DHT_Unified dht(dhtPin, DHTTYPE);
 float Temp = 0;
 float Hum = 0;
 float bodenFeuchte = 0;

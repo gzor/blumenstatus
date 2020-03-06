@@ -1,8 +1,8 @@
 #pragma once
 
-const int mhZ14aPIN = 23;
-const int dhtPin = 17;
-const int feuchtigkeistSensorPin = 36;
+const int mhZ14aPIN = CO2PIN;
+const int dhtPin = DHTPIN;
+const int feuchtigkeistSensorPin = MOISTPIN;
 
 const int relayPin1 = 15;
 const int relayPin2 = 2;

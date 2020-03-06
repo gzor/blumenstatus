@@ -6,7 +6,9 @@ void setup()
 {
 	Serial.begin(115200);
 	dht.begin();
-	pinMode(mhZ14aPIN, INPUT);
+	#ifdef CO2SENSOR
+		pinMode(mhZ14aPIN, INPUT);
+	#endif
 	pinMode(feuchtigkeistSensorPin, INPUT);
 }
 
@@ -14,10 +16,16 @@ void loop()
 {
 	GetDHTSensorData();
 	//ReadCO2Sensor();
-	ReadCO2Sensor10times();
+	#ifdef CO2SENSOR
+		ReadCO2Sensor10times();
+	#endif
 	readBodenfeuchte();
 	Connect T{};
-	T.SendData(Temp, Hum, bodenFeuchte, co2ppmMedian.getMedian());
+	#ifdef CO2SENSOR
+		T.SendData(Temp, Hum, bodenFeuchte, co2ppmMedian.getMedian());
+	#else
+		T.SendData(Temp, Hum, bodenFeuchte, 0);
+	#endif
 	//delay(60000);
 	esp_sleep_enable_timer_wakeup(SECONDS_TO_SLEEP * uS_TO_S_FACTOR);
 	//esp_deep_sleep_start();
