@@ -94,12 +94,12 @@ void readBodenfeuchte()
 		if(bodenFeuchte < 25)
 		{
 			// LED ON
-			digitalWrite(LEDPIN, HIGH);
+			digitalWrite(LEDPIN, ledOn);
 		}
 		else
 		{
 			//LED OFF
-			digitalWrite(LEDPIN, LOW);
+			digitalWrite(LEDPIN, ledOff);
 		}
 	#endif
 }
