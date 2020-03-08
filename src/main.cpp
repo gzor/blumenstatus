@@ -9,6 +9,9 @@ void setup()
 	#ifdef CO2SENSOR
 		pinMode(mhZ14aPIN, INPUT);
 	#endif
+	#ifdef LEDPIN
+		pinMode(LEDPIN, OUTPUT);
+	#endif
 	pinMode(feuchtigkeistSensorPin, INPUT);
 }
 
@@ -73,8 +76,8 @@ void GetDHTSensorData()
 
 void readBodenfeuchte()
 {
-	const int untergrenze = 1650;
-	const int obergrenze = 3390;
+	const int untergrenze = MOISTLOWERLIMIT;
+	const int obergrenze = MOISTUPPERLIMIT;
 	// returns value between 0 and 4095
 	// 0 is super wet, 4095 is super dry
 	double temp = analogRead(feuchtigkeistSensorPin);
@@ -82,4 +85,14 @@ void readBodenfeuchte()
 	// 1- because 0% is defined as dry
 	bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
 	Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
+	#ifdef LEDPIN
+		if(bodenFeuchte < 25)
+		{
+			digitalWrite(LEDPIN, HIGH);
+		}
+		else
+		{
+			digitalWrite(LEDPIN, LOW);
+		}
+	#endif
 }
