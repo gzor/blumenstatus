@@ -86,13 +86,20 @@ void readBodenfeuchte()
 	bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
 	Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
 	#ifdef LEDPIN
+		uint8_t ledOn = HIGH, ledOff = LOW;
+		#ifdef REVERTLEDONHIGGROW
+			ledOn = LOW;
+			ledOff = HIGH;
+		#endif
 		if(bodenFeuchte < 25)
 		{
-			digitalWrite(LEDPIN, HIGH);
+			// LED ON
+			digitalWrite(LEDPIN, ledOn);
 		}
 		else
 		{
-			digitalWrite(LEDPIN, LOW);
+			//LED OFF
+			digitalWrite(LEDPIN, ledOff);
 		}
 	#endif
 }
