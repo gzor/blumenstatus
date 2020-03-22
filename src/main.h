@@ -17,6 +17,7 @@ void readBodenfeuchte();
 
 
 RTC_DATA_ATTR int currentRelayTest = 0;
+RTC_DATA_ATTR bool deactivate_pump = false;
 
 #ifdef CO2SENSOR
     FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;

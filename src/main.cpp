@@ -13,7 +13,7 @@ void setup()
 		pinMode(LEDPIN, OUTPUT);
 	#endif
 	pinMode(feuchtigkeistSensorPin, INPUT);
-	pinMode(relayPin1,OUTPUT);
+	pinMode(relayPin1, OUTPUT);
 }
 
 void loop()
@@ -114,5 +114,17 @@ float readMoistureSensor()
 }
 void wasserMarsch(float moisture)
 {
-
+	// Idea: activate pump 15 seconds, wait 15 more seconds, and look if water arrived.
+	// If there is no increase in moisture deactivate the pump
+	// to ensure the pump is not running constantly if the water stock is empty
+	if(!deactivate_pump)
+	{
+		digitalWrite(relayPin1, HIGH);
+		delay(15*1000);
+		digitalWrite(relayPin1, LOW);
+		delay(15*1000);
+		float moistureAfterPump = readMoistureSensor();
+		if(moistureAfterPump <= moisture)
+			deactivate_pump = true;
+	}
 }
