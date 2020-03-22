@@ -121,9 +121,9 @@ void wasserMarsch(float moisture)
 	if(!deactivate_pump)
 	{
 		digitalWrite(relayPin1, LOW);
-		delay(15*1000);
+		delay(30*1000);
 		digitalWrite(relayPin1, HIGH);
-		delay(15*1000);
+		delay(60*1000);
 		float moistureAfterPump = readMoistureSensor();
 		if(moistureAfterPump <= moisture)
 			deactivate_pump = true;
