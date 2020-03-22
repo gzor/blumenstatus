@@ -11,7 +11,9 @@
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
 
-void readBodenfeuchte();
+float readMoistureSensor();
+bool needWater(float);
+void wasserMarsch(float);
 
 
 
