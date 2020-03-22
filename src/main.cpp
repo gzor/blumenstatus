@@ -13,6 +13,7 @@ void setup()
 		pinMode(LEDPIN, OUTPUT);
 	#endif
 	pinMode(feuchtigkeistSensorPin, INPUT);
+	pinMode(relayPin1,OUTPUT);
 }
 
 void loop()
@@ -22,12 +23,14 @@ void loop()
 	#ifdef CO2SENSOR
 		ReadCO2Sensor10times();
 	#endif
-	readBodenfeuchte();
+	float moisture = readMoistureSensor();
+	if(needWater(moisture))
+		wasserMarsch(moisture);
 	Connect T{};
 	#ifdef CO2SENSOR
-		T.SendData(Temp, Hum, bodenFeuchte, co2ppmMedian.getMedian());
+		T.SendData(Temp, Hum, moisture, co2ppmMedian.getMedian());
 	#else
-		T.SendData(Temp, Hum, bodenFeuchte, 0);
+		T.SendData(Temp, Hum, moisture, 0);
 	#endif
 	//delay(60000);
 	esp_sleep_enable_timer_wakeup(SECONDS_TO_SLEEP * uS_TO_S_FACTOR);
@@ -74,17 +77,8 @@ void GetDHTSensorData()
 	}
 }
 
-void readBodenfeuchte()
+bool needWater(float bodenFeuchte)
 {
-	const int untergrenze = MOISTLOWERLIMIT;
-	const int obergrenze = MOISTUPPERLIMIT;
-	// returns value between 0 and 4095
-	// 0 is super wet, 4095 is super dry
-	double temp = analogRead(feuchtigkeistSensorPin);
-	// conversion into %
-	// 1- because 0% is defined as dry
-	bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
-	Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
 	#ifdef LEDPIN
 		uint8_t ledOn = HIGH, ledOff = LOW;
 		#ifdef REVERTLEDONHIGGROW
@@ -95,11 +89,30 @@ void readBodenfeuchte()
 		{
 			// LED ON
 			digitalWrite(LEDPIN, ledOn);
+			return true;
 		}
 		else
 		{
 			//LED OFF
 			digitalWrite(LEDPIN, ledOff);
+			return false;
 		}
 	#endif
+}
+float readMoistureSensor()
+{
+	const int untergrenze = MOISTLOWERLIMIT;
+	const int obergrenze = MOISTUPPERLIMIT;
+	// returns value between 0 and 4095
+	// 0 is super wet, 4095 is super dry
+	double temp = analogRead(feuchtigkeistSensorPin);
+	// conversion into %
+	// 1- because 0% is defined as dry
+	float bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
+	Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
+	return bodenFeuchte;
+}
+void wasserMarsch(float moisture)
+{
+
 }
