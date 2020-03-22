@@ -12,7 +12,8 @@ void ReadCO2Sensor10times();
 void GetDHTSensorData();
 
 float readMoistureSensor();
-bool needWater(float);
+void ActivateLedIfWaterNeeded(float);
+bool MoistureToLow(float);
 void wasserMarsch(float);
 
 

@@ -25,7 +25,8 @@ void loop()
 		ReadCO2Sensor10times();
 	#endif
 	float moisture = readMoistureSensor();
-	if(needWater(moisture))
+	ActivateLedIfWaterNeeded(moisture);
+	if(MoistureToLow(moisture))
 		wasserMarsch(moisture);
 	Connect T{};
 	#ifdef CO2SENSOR
@@ -77,8 +78,14 @@ void GetDHTSensorData()
 		Hum = event.relative_humidity;
 	}
 }
-
-bool needWater(float bodenFeuchte)
+bool MoistureToLow(float moisture)
+{
+	if(moisture < 25)
+		return true;
+	else
+		return false;
+}
+void ActivateLedIfWaterNeeded(float bodenFeuchte)
 {
 	#ifdef LEDPIN
 		uint8_t ledOn = HIGH, ledOff = LOW;
@@ -86,7 +93,7 @@ bool needWater(float bodenFeuchte)
 			ledOn = LOW;
 			ledOff = HIGH;
 		#endif
-		if(bodenFeuchte < 25)
+		if(MoistureToLow(bodenFeuchte))
 		{
 			// LED ON
 			digitalWrite(LEDPIN, ledOn);
