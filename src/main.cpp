@@ -87,25 +87,17 @@ bool MoistureToLow(float moisture)
 }
 void ActivateLedIfWaterNeeded(float bodenFeuchte)
 {
-	#ifdef LEDPIN
-		uint8_t ledOn = HIGH, ledOff = LOW;
-		#ifdef REVERTLEDONHIGGROW
-			ledOn = LOW;
-			ledOff = HIGH;
-		#endif
-		if(MoistureToLow(bodenFeuchte))
-		{
-			// LED ON
-			digitalWrite(LEDPIN, ledOn);
-			return true;
-		}
-		else
-		{
-			//LED OFF
-			digitalWrite(LEDPIN, ledOff);
-			return false;
-		}
+#ifdef LEDPIN
+	uint8_t ledOn = HIGH, ledOff = LOW;
+	#ifdef REVERTLEDONHIGGROW
+		ledOn = LOW;
+		ledOff = HIGH;
 	#endif
+	if(MoistureToLow(bodenFeuchte))
+		digitalWrite(LEDPIN, ledOn);
+	else
+		digitalWrite(LEDPIN, ledOff);
+#endif
 }
 float readMoistureSensor()
 {
