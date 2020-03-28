@@ -1,6 +1,7 @@
 #include "main.h"
 #include "connect.h"
 #include "plant.h"
+#include "planthandler.cpp"
 
 #ifdef CO2SENSOR
     FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
@@ -10,7 +11,7 @@ DHT_Unified dht(dhtPin, DHTTYPE);
 float Temp = 0;
 float Hum = 0;
 
-Plant plant1(1,1);
+Plant plant1(MOISTPIN,relayPin1);
 
 void setup()
 {
