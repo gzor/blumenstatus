@@ -6,7 +6,7 @@
     #include "../lib/runningfastmedian.h"
 #endif
 
-void ReadCO2Sensor10times();
+unsigned long ReadCO2Sensor10times();
 void GetDHTSensorData();
 
 void initAllPlants();

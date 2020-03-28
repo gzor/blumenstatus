@@ -27,20 +27,17 @@ void setup()
 void loop()
 {
 	GetDHTSensorData();
-	//ReadCO2Sensor();
+	
+	unsigned long co2ppm = 0;
 	#ifdef CO2SENSOR
-		ReadCO2Sensor10times();
+		co2ppm = ReadCO2Sensor10times();
 	#endif
 	float* moistureArray = handleAllAvailablePlants();
 	float moisture = moistureArray[0];
 	delete(moistureArray);
 
 	Connect T{};
-	#ifdef CO2SENSOR
-		T.SendData(Temp, Hum, moisture, co2ppmMedian.getMedian());
-	#else
-		T.SendData(Temp, Hum, moisture, 0);
-	#endif
+	T.SendData(Temp, Hum, moisture, co2ppm);
 	//delay(60000);
 	esp_sleep_enable_timer_wakeup(SECONDS_TO_SLEEP * uS_TO_S_FACTOR);
 	//esp_deep_sleep_start();
@@ -48,7 +45,7 @@ void loop()
 }
 
 #ifdef CO2SENSOR
-void ReadCO2Sensor10times()
+unsigned long ReadCO2Sensor10times()
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -68,6 +65,7 @@ void ReadCO2Sensor10times()
 		//Serial.print(String(co2ppmTemp1)+", ");
 		co2ppmMedian.addValue(co2ppmTemp1);
 	}
+	return co2ppmMedian.getMedian();
 }
 #endif
 
