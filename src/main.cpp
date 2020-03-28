@@ -1,20 +1,28 @@
 #include "main.h"
 #include "connect.h"
+#include "plant.h"
 
+#ifdef CO2SENSOR
+    FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
+#endif
+
+DHT_Unified dht(dhtPin, DHTTYPE);
+float Temp = 0;
+float Hum = 0;
+
+Plant plant1(1,1);
 
 void setup()
 {
 	Serial.begin(115200);
 	dht.begin();
+	plant1.init();
 	#ifdef CO2SENSOR
 		pinMode(mhZ14aPIN, INPUT);
 	#endif
 	#ifdef LEDPIN
 		pinMode(LEDPIN, OUTPUT);
 	#endif
-	pinMode(feuchtigkeistSensorPin, INPUT);
-	pinMode(relayPin1, OUTPUT);
-	digitalWrite(relayPin1, HIGH);
 }
 
 void loop()
@@ -24,10 +32,11 @@ void loop()
 	#ifdef CO2SENSOR
 		ReadCO2Sensor10times();
 	#endif
-	float moisture = readMoistureSensor();
-	ActivateLedIfWaterNeeded(moisture);
-	if(MoistureToLow(moisture))
-		wasserMarsch(moisture);
+	float moisture = plant1.handle();
+	// readMoistureSensor();
+	// ActivateLedIfWaterNeeded(moisture);
+	// if(MoistureToLow(moisture))
+	// 	wasserMarsch(moisture);
 	Connect T{};
 	#ifdef CO2SENSOR
 		T.SendData(Temp, Hum, moisture, co2ppmMedian.getMedian());
@@ -76,55 +85,5 @@ void GetDHTSensorData()
 	if (!isnan(event.relative_humidity))
 	{
 		Hum = event.relative_humidity;
-	}
-}
-bool MoistureToLow(float moisture)
-{
-	if(moisture < 25)
-		return true;
-	else
-		return false;
-}
-void ActivateLedIfWaterNeeded(float bodenFeuchte)
-{
-#ifdef LEDPIN
-	uint8_t ledOn = HIGH, ledOff = LOW;
-	#ifdef REVERTLEDONHIGGROW
-		ledOn = LOW;
-		ledOff = HIGH;
-	#endif
-	if(MoistureToLow(bodenFeuchte))
-		digitalWrite(LEDPIN, ledOn);
-	else
-		digitalWrite(LEDPIN, ledOff);
-#endif
-}
-float readMoistureSensor()
-{
-	const int untergrenze = MOISTLOWERLIMIT;
-	const int obergrenze = MOISTUPPERLIMIT;
-	// returns value between 0 and 4095
-	// 0 is super wet, 4095 is super dry
-	double temp = analogRead(feuchtigkeistSensorPin);
-	// conversion into %
-	// 1- because 0% is defined as dry
-	float bodenFeuchte = (1.0 - ((temp - untergrenze) / (obergrenze - untergrenze))) * 100;
-	Serial.println("bodenfeuchte: " + String(bodenFeuchte) + ", raw value: " + String(temp));
-	return bodenFeuchte;
-}
-void wasserMarsch(float moisture)
-{
-	// Idea: activate pump 15 seconds, wait 15 more seconds, and look if water arrived.
-	// If there is no increase in moisture deactivate the pump
-	// to ensure the pump is not running constantly if the water stock is empty
-	if(!deactivate_pump)
-	{
-		digitalWrite(relayPin1, LOW);
-		delay(15*1000);
-		digitalWrite(relayPin1, HIGH);
-		delay(60*1000);
-		float moistureAfterPump = readMoistureSensor();
-		if(moistureAfterPump <= moisture)
-			deactivate_pump = true;
 	}
 }

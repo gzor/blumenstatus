@@ -11,24 +11,12 @@
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
 
-float readMoistureSensor();
-void ActivateLedIfWaterNeeded(float);
-bool MoistureToLow(float);
-void wasserMarsch(float);
+
+
+// RTC_DATA_ATTR int currentRelayTest = 0;
 
 
 
-
-RTC_DATA_ATTR int currentRelayTest = 0;
-RTC_DATA_ATTR bool deactivate_pump = false;
-
-#ifdef CO2SENSOR
-    FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
-#endif
-
-DHT_Unified dht(dhtPin, DHTTYPE);
-float Temp = 0;
-float Hum = 0;
 // float bodenFeuchte = 0;
 
 #define uS_TO_S_FACTOR 1000000 /* Conversion factor for micro seconds to seconds */
