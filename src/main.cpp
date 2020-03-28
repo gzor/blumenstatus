@@ -1,6 +1,5 @@
 #include "main.h"
 #include "connect.h"
-#include "plant.h"
 #include "planthandler.cpp"
 
 #ifdef CO2SENSOR
@@ -11,13 +10,11 @@ DHT_Unified dht(dhtPin, DHTTYPE);
 float Temp = 0;
 float Hum = 0;
 
-Plant plant1(MOISTPIN,relayPin1);
-
 void setup()
 {
 	Serial.begin(115200);
 	dht.begin();
-	plant1.init();
+	initAllPlants();
 	#ifdef CO2SENSOR
 		pinMode(mhZ14aPIN, INPUT);
 	#endif
@@ -33,7 +30,8 @@ void loop()
 	#ifdef CO2SENSOR
 		ReadCO2Sensor10times();
 	#endif
-	float moisture = plant1.handle();
+	handleAllAvailablePlants();
+	float moisture = handleAllAvailablePlants()[0];
 	// readMoistureSensor();
 	// ActivateLedIfWaterNeeded(moisture);
 	// if(MoistureToLow(moisture))
