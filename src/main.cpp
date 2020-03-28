@@ -1,6 +1,7 @@
 #include "main.h"
 #include "connect.h"
-#include "planthandler.cpp"
+#include "plant.h"
+#include "pindefintion.h"
 
 #ifdef CO2SENSOR
     FastRunningMedian<unsigned long, 10, 0> co2ppmMedian;
@@ -30,12 +31,10 @@ void loop()
 	#ifdef CO2SENSOR
 		ReadCO2Sensor10times();
 	#endif
-	handleAllAvailablePlants();
-	float moisture = handleAllAvailablePlants()[0];
-	// readMoistureSensor();
-	// ActivateLedIfWaterNeeded(moisture);
-	// if(MoistureToLow(moisture))
-	// 	wasserMarsch(moisture);
+	float* moistureArray = handleAllAvailablePlants();
+	float moisture = moistureArray[0];
+	delete(moistureArray);
+
 	Connect T{};
 	#ifdef CO2SENSOR
 		T.SendData(Temp, Hum, moisture, co2ppmMedian.getMedian());
@@ -85,4 +84,50 @@ void GetDHTSensorData()
 	{
 		Hum = event.relative_humidity;
 	}
+}
+
+#ifdef MOISTPIN1
+    Plant plant1(MOISTPIN1,relayPin1);
+#endif
+#ifdef MOISTPIN2
+    Plant plant2(MOISTPIN2,relayPin2);
+#endif
+#ifdef MOISTPIN2
+    Plant plant3(MOISTPIN3,relayPin3);
+#endif
+#ifdef MOISTPIN2
+    Plant plant4(MOISTPIN4,relayPin4);
+#endif
+
+void initAllPlants()
+{
+    #ifdef MOISTPIN1
+        plant1.init();
+    #endif
+    #ifdef MOISTPIN2
+        plant2.init();
+    #endif
+    #ifdef MOISTPIN3
+        plant3.init();
+    #endif
+    #ifdef MOISTPIN4
+        plant4.init();
+    #endif
+}
+float* handleAllAvailablePlants()
+{
+    float* moistureValues = new float[4];
+    #ifdef MOISTPIN1
+        moistureValues[0] = plant1.handle();
+    #endif
+    #ifdef MOISTPIN2
+        moistureValues[1] = plant2.handle();
+    #endif
+    #ifdef MOISTPIN3
+        moistureValues[2] = plant3.handle();
+    #endif
+    #ifdef MOISTPIN4
+        moistureValues[3] = plant4.handle();
+    #endif
+    return moistureValues;
 }

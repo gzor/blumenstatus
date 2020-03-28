@@ -5,7 +5,7 @@
 #endif
 
 const int dhtPin = DHTPIN;
-const int feuchtigkeistSensorPin = MOISTPIN;
+// const int feuchtigkeistSensorPin = MOISTPIN;
 
 const int relayPin1 = 15;
 const int relayPin2 = 2;

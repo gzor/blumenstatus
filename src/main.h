@@ -1,5 +1,4 @@
 #pragma once
-#include "pindefintion.h"
 #include <cmath>
 #include <DHT.h>
 #include <DHT_U.h>
@@ -10,7 +9,8 @@
 void ReadCO2Sensor10times();
 void GetDHTSensorData();
 
-
+void initAllPlants();
+float* handleAllAvailablePlants();
 
 // RTC_DATA_ATTR int currentRelayTest = 0;
 
