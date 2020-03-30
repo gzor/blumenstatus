@@ -11,6 +11,7 @@ DHT_Unified dht(dhtPin, DHTTYPE);
 float Temp = 0;
 float Hum = 0;
 Connect T{};
+TaskHandle_t OTATask;
 
 void setup()
 {
@@ -24,11 +25,10 @@ void setup()
 		pinMode(LEDPIN, OUTPUT);
 	#endif
 	T.ConnectToWiFi();
-	TaskHandle_t OTATask;
 	xTaskCreatePinnedToCore(
       waitForOtaUpdateInfinitly, /* Function to implement the task */
       "OTATask", /* Name of the task */
-      40000,  /* Stack size in words */
+      120000,  /* Stack size in words */
       NULL,  /* Task input parameter */
       0,  /* Priority of the task */
       &OTATask,  /* Task handle. */
