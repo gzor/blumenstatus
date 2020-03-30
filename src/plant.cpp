@@ -1,11 +1,17 @@
 #include "plant.h"
 #include "main.h"
 RTC_DATA_ATTR bool deactivate_pump = false;
+bool relayOut = HIGH;
+bool relayOn= LOW;
+#ifdef relayHighTrigger
+	relayOn = HIGH;
+	relayOut = LOW;
+#endif
 
 void Plant::init(){
     pinMode(_moistureSensorPin, INPUT);
 	pinMode(_relayPin, OUTPUT);
-	digitalWrite(_relayPin, HIGH);
+	digitalWrite(_relayPin, relayOut);
 }
 float Plant::handle()
 {
@@ -59,9 +65,9 @@ void Plant::wasserMarsch(float moisture)
 	// to ensure the pump is not running constantly if the water stock is empty
 	if(!deactivate_pump)
 	{
-		digitalWrite(_relayPin, LOW);
+		digitalWrite(_relayPin, relayOn);
 		delay(15*1000);
-		digitalWrite(_relayPin, HIGH);
+		digitalWrite(_relayPin, relayOut);
 		delay(60*1000);
 		float moistureAfterPump = readMoistureSensor();
 		if(moistureAfterPump <= moisture)
