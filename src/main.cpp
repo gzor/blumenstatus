@@ -28,7 +28,7 @@ void setup()
 	xTaskCreatePinnedToCore(
       waitForOtaUpdateInfinitly, /* Function to implement the task */
       "OTATask", /* Name of the task */
-      120000,  /* Stack size in words */
+      150000,  /* Stack size in words */
       NULL,  /* Task input parameter */
       0,  /* Priority of the task */
       &OTATask,  /* Task handle. */
