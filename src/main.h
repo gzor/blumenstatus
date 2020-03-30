@@ -12,6 +12,8 @@ void GetDHTSensorData();
 void initAllPlants();
 float* handleAllAvailablePlants();
 
+void waitForOtaUpdateInfinitly(void * parameter);
+
 // RTC_DATA_ATTR int currentRelayTest = 0;
 
 

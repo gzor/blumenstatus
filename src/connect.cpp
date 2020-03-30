@@ -30,7 +30,7 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
   InterpretWriteToCloudReturnValue(write_to_cloud_return_value);
 
   delay(500);
-  waitForOtaUpdate();
+  // waitForOtaUpdate();
 }
 void  Connect::InterpretWriteToCloudReturnValue(int writeToCloudReturnValue)
 {

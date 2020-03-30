@@ -16,10 +16,10 @@ class Connect
     const char *myWriteAPIKey = ThingSpeakWriteAPIKey;
     WiFiClient client;
 
-    void ConnectToWiFi();
     void InterpretWriteToCloudReturnValue(int);
     void waitForOtaUpdate();
     
 public: 
+    void ConnectToWiFi();
     void SendData(float,float,float,long);
 };
