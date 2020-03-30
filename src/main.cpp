@@ -26,6 +26,8 @@ void setup()
 
 void loop()
 {
+	Serial.print("setup() running on core ");
+	Serial.println(xPortGetCoreID());
 	GetDHTSensorData();
 	
 	unsigned long co2ppm = 0;
