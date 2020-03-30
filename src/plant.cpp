@@ -1,12 +1,6 @@
 #include "plant.h"
 #include "main.h"
 RTC_DATA_ATTR bool deactivate_pump = false;
-bool relayOut = HIGH;
-bool relayOn= LOW;
-#ifdef relayHighTrigger
-	relayOn = HIGH;
-	relayOut = LOW;
-#endif
 
 void Plant::init(){
     pinMode(_moistureSensorPin, INPUT);
