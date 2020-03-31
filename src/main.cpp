@@ -103,10 +103,10 @@ void GetDHTSensorData()
 #ifdef MOISTPIN2
     Plant plant2(MOISTPIN2,relayPin2);
 #endif
-#ifdef MOISTPIN2
+#ifdef MOISTPIN3
     Plant plant3(MOISTPIN3,relayPin3);
 #endif
-#ifdef MOISTPIN2
+#ifdef MOISTPIN4
     Plant plant4(MOISTPIN4,relayPin4);
 #endif
 
