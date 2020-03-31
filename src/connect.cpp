@@ -146,6 +146,8 @@ void Connect::waitForOtaUpdate(){
   {
       ArduinoOTA.handle();
       // delay(100); // 1/10 second delay
+      if( i%SECONDS_TO_SLEEP == 0 )
+        Serial.print("o");
       vTaskDelay((100)/portTICK_PERIOD_MS);
   }
 }
