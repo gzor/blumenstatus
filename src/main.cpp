@@ -25,20 +25,20 @@ void setup()
 		pinMode(LEDPIN, OUTPUT);
 	#endif
 	T.ConnectToWiFi();
-	xTaskCreatePinnedToCore(
-      waitForOtaUpdateInfinitly, /* Function to implement the task */
-      "OTATask", /* Name of the task */
-      150000,  /* Stack size in words */
-      NULL,  /* Task input parameter */
-      3,  /* Priority of the task */
-      &OTATask,  /* Task handle. */
-      0); /* Core where the task should run */
+	// xTaskCreatePinnedToCore(
+  //     waitForOtaUpdateInfinitly, /* Function to implement the task */
+  //     "OTATask", /* Name of the task */
+  //     150000,  /* Stack size in words */
+  //     NULL,  /* Task input parameter */
+  //     3,  /* Priority of the task */
+  //     &OTATask,  /* Task handle. */
+  //     0); /* Core where the task should run */
 }
 
 void loop()
 {
-	Serial.print("loop() running on core ");
-	Serial.println(xPortGetCoreID());
+	// Serial.print("loop() running on core ");
+	// Serial.println(xPortGetCoreID());
 	GetDHTSensorData();
 	
 	unsigned long co2ppm = 0;
@@ -55,6 +55,7 @@ void loop()
 	//esp_deep_sleep_start();
 	// delay(500);
   vTaskDelay(500/portTICK_PERIOD_MS);
+  T.waitForOtaUpdate();
 }
 
 #ifdef CO2SENSOR

@@ -17,9 +17,10 @@ class Connect
     WiFiClient client;
 
     void InterpretWriteToCloudReturnValue(int);
-    void waitForOtaUpdate();
+    
     
 public: 
     void ConnectToWiFi();
     void SendData(float,float,float,long);
+    void waitForOtaUpdate();
 };
