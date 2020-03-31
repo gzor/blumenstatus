@@ -150,4 +150,6 @@ void Connect::waitForOtaUpdate(){
         Serial.print("o");
       vTaskDelay((100)/portTICK_PERIOD_MS);
   }
+   Serial.println("");
+   Serial.println("");
 }
