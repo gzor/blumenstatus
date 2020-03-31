@@ -183,10 +183,9 @@ void waitForOtaUpdateInfinitly(void * parameter){
   for (;;)
   {
       ArduinoOTA.handle();
-    //   delay(100); // 1/10 second delay
 	  //vtaskDelay is not blocking... core 0 needs to run kernel things like 
 	  // wifi handling
-	  vTaskDelay(100/portTICK_PERIOD_MS);
+	  vTaskDelay(1000/portTICK_PERIOD_MS);
 
   }
 }
