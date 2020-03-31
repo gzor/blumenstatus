@@ -60,9 +60,11 @@ void Plant::wasserMarsch(float moisture)
 	if(!deactivate_pump)
 	{
 		digitalWrite(_relayPin, relayOn);
-		delay(15*1000);
+		vTaskDelay((15*1000)/portTICK_PERIOD_MS);
+		// delay(15*1000);
 		digitalWrite(_relayPin, relayOut);
-		delay(60*1000);
+		// delay(60*1000);
+		vTaskDelay((15*1000)/portTICK_PERIOD_MS);
 		float moistureAfterPump = readMoistureSensor();
 		if(moistureAfterPump <= moisture)
 			deactivate_pump = true;

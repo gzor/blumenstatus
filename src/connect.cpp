@@ -28,8 +28,8 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
   Serial.print(String(co2ppm) + " ");
   Serial.println("Fields sended");
   InterpretWriteToCloudReturnValue(write_to_cloud_return_value);
-
-  delay(500);
+  vTaskDelay((500)/portTICK_PERIOD_MS);
+  // delay(500);
   // waitForOtaUpdate();
 }
 void  Connect::InterpretWriteToCloudReturnValue(int writeToCloudReturnValue)
@@ -96,7 +96,8 @@ void  Connect::ConnectToWiFi()
   int i = 0;
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(500);
+    // delay(500);
+    vTaskDelay((500)/portTICK_PERIOD_MS);
     Serial.print(".");
     i++;
     if (i > 50)
@@ -144,6 +145,7 @@ void Connect::waitForOtaUpdate(){
   for (int i=0; i < (SECONDS_TO_SLEEP * 10); i++)
   {
       ArduinoOTA.handle();
-      delay(100); // 1/10 second delay
+      // delay(100); // 1/10 second delay
+      vTaskDelay((100)/portTICK_PERIOD_MS);
   }
 }

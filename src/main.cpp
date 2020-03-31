@@ -30,7 +30,7 @@ void setup()
       "OTATask", /* Name of the task */
       150000,  /* Stack size in words */
       NULL,  /* Task input parameter */
-      0,  /* Priority of the task */
+      3,  /* Priority of the task */
       &OTATask,  /* Task handle. */
       0); /* Core where the task should run */
 }
@@ -53,7 +53,8 @@ void loop()
 	//delay(60000);
 	esp_sleep_enable_timer_wakeup(SECONDS_TO_SLEEP * uS_TO_S_FACTOR);
 	//esp_deep_sleep_start();
-	delay(500);
+	// delay(500);
+  vTaskDelay(500/portTICK_PERIOD_MS);
 }
 
 #ifdef CO2SENSOR
