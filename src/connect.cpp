@@ -16,6 +16,18 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
   }
   ThingSpeak.setField(4, long(co2ppm));
   const int write_to_cloud_return_value = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+  // if the send process fails consecutively (5times in short time), then it maybe helps to perform a restart
+  if(write_to_cloud_return_value != 200)
+  {
+    sendfailed++;
+    if(sendfailed > 5)
+      ESP.restart();
+    
+  }else
+  {
+    if(sendfailed>0)
+      sendfailed--;
+  }
   if (temp != 0)
   {
     Serial.print(String(temp) + ", ");

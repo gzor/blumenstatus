@@ -15,6 +15,7 @@ class Connect
     const unsigned long myChannelNumber = ThingSpeakChannelNumber;
     const char *myWriteAPIKey = ThingSpeakWriteAPIKey;
     WiFiClient client;
+    int sendfailed;
 
     void InterpretWriteToCloudReturnValue(int);
     
