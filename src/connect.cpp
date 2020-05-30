@@ -104,6 +104,7 @@ void  Connect::InterpretWriteToCloudReturnValue(int writeToCloudReturnValue)
 
 void  Connect::ConnectToWiFi()
 {
+  WiFi.setHostname(HOSTNAME);
   WiFi.begin(ssid, password);
   Serial.println("Connect to SSID: " + String(ssid));
   Serial.println("With password: " + String(password));
