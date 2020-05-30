@@ -1,4 +1,7 @@
 #include "connect.h"
+#include <ThingSpeak.h>
+#include <Arduino.h>
+#include <ArduinoOTA.h>
 
 void Connect::SendData(float temp,float hum, float moist,long co2ppm)
 {
@@ -22,7 +25,6 @@ void Connect::SendData(float temp,float hum, float moist,long co2ppm)
     sendfailed++;
     if(sendfailed > 5)
       ESP.restart();
-    
   }else
   {
     if(sendfailed>0)

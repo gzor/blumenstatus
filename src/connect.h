@@ -1,9 +1,6 @@
 #pragma once
-#include <ThingSpeak.h>
-#include <WiFi.h>
-#include <Arduino.h>
 
-#include <ArduinoOTA.h>
+#include <WiFi.h>
 
 class Connect
 {
